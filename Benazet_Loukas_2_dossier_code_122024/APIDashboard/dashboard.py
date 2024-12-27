@@ -83,8 +83,8 @@ def generate_figure_with_gradient(df, title_text, x_anchor, yaxis_categoryorder,
         st.error("Erreur : Les données pour le graphique sont invalides ou manquantes.")
         return go.Figure()
 
-    if df.empty or df["SHAP Value"].abs().sum() < 1e-5:
-        st.warning("Les valeurs SHAP sont trop faibles ou inexistantes pour générer un graphique.")
+    if df.empty:
+        st.warning("Pas de données disponibles pour générer un graphique.")
         return go.Figure()
     
     # Normalisation des valeurs
@@ -323,7 +323,7 @@ if col1.button("Run") or state["data_received"]:
             st.stop()
 
         state["data"] = data
-        state["data_received"] = Truecomme ç
+        state["data_received"] = True
 
     st.write("Données retournées par l'API :")
     st.json(data)
