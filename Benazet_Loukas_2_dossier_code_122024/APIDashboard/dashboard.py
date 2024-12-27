@@ -254,18 +254,11 @@ def get_state():
         st.session_state["state"] = {
             "data_received": False,
             "data": None,
-            "last_sk_id_curr": None,  # Ajouter cette ligne pour stocker le dernier ID soumis
+            "last_sk_id_curr": None,  # Stocker le dernier ID soumis
         }
-    elif (
-        "last_sk_id_curr" not in st.session_state["state"]
-    ):  # Vérifier si 'last_sk_id_curr' existe
-        st.session_state["state"][
-            "last_sk_id_curr"
-        ] = None  # Si ce n'est pas le cas, ajoutez-le.
-
     return st.session_state["state"]
 
-state = get_state()
+state = get_state()  # Initialise ou récupère l'état
 
 st.markdown(
     "<h1 style='text-align: center; color: black;'>Estimation du risque de non-remboursement</h1>",
