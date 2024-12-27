@@ -393,7 +393,6 @@ if col1.button("Run") or state["data_received"]:
 
     # Mettez la première liste déroulante dans col1
     with col1:
-
         if top_positive_shap.empty:
             st.warning("Aucune fonctionnalité augmentant le risque n'est disponible.")
             selected_feature_positive = None
@@ -401,16 +400,11 @@ if col1.button("Run") or state["data_received"]:
             selected_feature_positive = st.selectbox(
                 "Sélectionnez une fonctionnalité augmentant le risque",
                 [""] + top_positive_shap["Feature"].tolist(),
+                key="positive_selectbox"  # Clé unique
             )
-        
-        selected_feature_positive = st.selectbox(
-            "Sélectionnez une fonctionnalité augmentant le risque",
-            [""] + top_positive_shap["Feature"].tolist(),
-        )
 
     # Mettez la deuxième liste déroulante dans col2
     with col2:
-
         if top_negative_shap.empty:
             st.warning("Aucune fonctionnalité réduisant le risque n'est disponible.")
             selected_feature_negative = None
@@ -418,13 +412,9 @@ if col1.button("Run") or state["data_received"]:
             selected_feature_negative = st.selectbox(
                 "Sélectionnez une fonctionnalité réduisant le risque",
                 [""] + top_negative_shap["Feature"].tolist(),
+                key="negative_selectbox"  # Clé unique
             )
-        
-        selected_feature_negative = st.selectbox(
-            "Sélectionnez une fonctionnalité réduisant le risque",
-            [""] + top_negative_shap["Feature"].tolist(),
-        )
 
-    # Et finalement, appelez vos fonctions `plot_distribution` :
-    plot_distribution(selected_feature_positive, col1)
-    plot_distribution(selected_feature_negative, col2)
+# Et finalement, appelez vos fonctions `plot_distribution` :
+plot_distribution(selected_feature_positive, col1)
+plot_distribution(selected_feature_negative, col2)
