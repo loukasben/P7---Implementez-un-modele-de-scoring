@@ -309,29 +309,29 @@ if col1.button("Run") or state["data_received"]:
         state["last_sk_id_curr"] = sk_id_curr  # Mettre à jour le dernier ID
 
     if not state["data_received"]:
-    response = requests.post(
-        "https://p7-implementez-un-modele-de-scoring.onrender.com/predict",
-        json={"SK_ID_CURR": int(sk_id_curr)},
-    )
+        response = requests.post(
+            "https://p7-implementez-un-modele-de-scoring.onrender.com/predict",
+            json={"SK_ID_CURR": int(sk_id_curr)},
+        )
 
-    if response.status_code != 200:
-        st.error(f"Erreur lors de l'appel à l'API : {response.status_code}")
-        st.stop()
+        if response.status_code != 200:
+            st.error(f"Erreur lors de l'appel à l'API : {response.status_code}")
+            st.stop()
 
-    # Charger la réponse en tant que JSON
-    data = response.json()
+        # Charger la réponse en tant que JSON
+        data = response.json()
 
-    # Vérifier la validité des données avant de les stocker
-    if not data or "probability" not in data or not data.get("feature_names"):
-        st.error("Erreur : Les données retournées par l'API sont invalides ou incomplètes.")
-        st.stop()
+        # Vérifier la validité des données avant de les stocker
+        if not data or "probability" not in data or not data.get("feature_names"):
+            st.error("Erreur : Les données retournées par l'API sont invalides ou incomplètes.")
+            st.stop()
 
-    # Stocker les données valides dans l'état
-    state["data"] = data
-    state["data_received"] = True
+        # Stocker les données valides dans l'état
+        state["data"] = data
+        state["data_received"] = True
 
-# Toujours utiliser `state["data"]` pour les étapes suivantes
-data = state["data"]
+    # Toujours utiliser `state["data"]` pour les étapes suivantes
+    data = state["data"]
 
     proba = data["probability"]
     feature_names = data["feature_names"]
