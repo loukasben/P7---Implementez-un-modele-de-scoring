@@ -325,9 +325,6 @@ if col1.button("Run") or state["data_received"]:
         state["data"] = data
         state["data_received"] = True
 
-    st.write("Données retournées par l'API :")
-    st.json(data)
-
     proba = data["probability"]
     feature_names = data["feature_names"]
     shap_values = data["shap_values"]
@@ -343,9 +340,6 @@ if col1.button("Run") or state["data_received"]:
         ),
         columns=["Feature", "SHAP Value", "Feature Value"],
     )
-
-    st.write("DataFrame SHAP Values :")
-    st.dataframe(shap_df)
     
     if shap_df.empty:
         st.error("Erreur : Le DataFrame SHAP est vide.")
