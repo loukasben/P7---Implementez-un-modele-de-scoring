@@ -82,6 +82,10 @@ def generate_figure_with_gradient(df, title_text, x_anchor, yaxis_categoryorder,
     if df.empty or "Feature" not in df.columns or "SHAP Value" not in df.columns:
         st.error("Erreur : Les données pour le graphique sont invalides ou manquantes.")
         return go.Figure()
+
+    if df.empty or df["SHAP Value"].abs().sum() < 1e-5:
+        st.warning("Les valeurs SHAP sont trop faibles ou inexistantes pour générer un graphique.")
+        return go.Figure()
     
     # Normalisation des valeurs
     norm = mcolors.Normalize(vmin=df["SHAP Value"].min(), vmax=df["SHAP Value"].max())
@@ -306,15 +310,20 @@ if col1.button("Run") or state["data_received"]:
 
     if not state["data_received"]:
         response = requests.post("https://p7-implementez-un-modele-de-scoring.onrender.com/predict", json={"SK_ID_CURR": int(sk_id_curr)})
-        
+    
         if response.status_code != 200:
             st.error(f"Erreur lors de l'appel à l'API: {response.status_code}")
             st.stop()
 
-        state["data"] = response.json()
-        state["data_received"] = True
+        data = response.json()
 
-    data = state["data"]
+        # Vérification des données de l'API
+        if not data or "probability" not in data or not data.get("feature_names"):
+            st.error("Erreur : Les données retournées par l'API sont invalides ou incomplètes.")
+            st.stop()
+
+        state["data"] = data
+        state["data_received"] = Truecomme ç
 
     st.write("Données retournées par l'API :")
     st.json(data)
@@ -337,7 +346,7 @@ if col1.button("Run") or state["data_received"]:
 
     st.write("DataFrame SHAP Values :")
     st.dataframe(shap_df)
-
+    
     if shap_df.empty:
         st.error("Erreur : Le DataFrame SHAP est vide.")
         st.stop()
