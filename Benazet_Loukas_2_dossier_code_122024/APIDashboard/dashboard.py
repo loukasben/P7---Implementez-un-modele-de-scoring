@@ -402,6 +402,9 @@ if col1.button("Run") or state["data_received"]:
                 [""] + top_positive_shap["Feature"].tolist(),
                 key="positive_selectbox"  # Clé unique
             )
+        # Appelez `plot_distribution` uniquement si une valeur est sélectionnée
+        if selected_feature_positive:
+            plot_distribution(selected_feature_positive, col1)
 
     # Mettez la deuxième liste déroulante dans col2
     with col2:
@@ -414,7 +417,6 @@ if col1.button("Run") or state["data_received"]:
                 [""] + top_negative_shap["Feature"].tolist(),
                 key="negative_selectbox"  # Clé unique
             )
-
-# Et finalement, appelez vos fonctions `plot_distribution` :
-plot_distribution(selected_feature_positive, col1)
-plot_distribution(selected_feature_negative, col2)
+        # Appelez `plot_distribution` uniquement si une valeur est sélectionnée
+        if selected_feature_negative:
+            plot_distribution(selected_feature_negative, col2)
