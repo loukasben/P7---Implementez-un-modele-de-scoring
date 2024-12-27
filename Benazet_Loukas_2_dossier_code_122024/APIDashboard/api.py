@@ -11,11 +11,11 @@ app = Flask(__name__)
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
 # Charger le modèle en dehors de la clause if __name__ == "__main__":
-model_path = os.path.join(current_directory, "Prediction", "model.pkl")
+model_path = os.path.join(current_directory, "../Prediction/model.pkl")
 model = joblib.load(model_path)
 
 # Charger le scaler
-scaler_path = os.path.join(current_directory, "Prediction", "StandardScaler.pkl")
+scaler_path = os.path.join(current_directory, "../Prediction/StandardScaler.pkl")
 scaler = joblib.load(scaler_path)
 
 @app.route("/", methods=['GET'])
@@ -28,7 +28,7 @@ def predict():
     sk_id_curr = data['SK_ID_CURR']
 
     # Construisez le chemin complet vers df_train.csv en utilisant le chemin relatif depuis l'emplacement de api.py
-    csv_path = os.path.join(current_directory, "Prediction", "df_train.csv")
+    csv_path = os.path.join(current_directory, "../Prediction/df_train.csv")
     # Charger le CSV
     df = pd.read_csv(csv_path)
     sample = df[df['SK_ID_CURR'] == sk_id_curr]

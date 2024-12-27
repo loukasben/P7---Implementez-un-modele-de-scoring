@@ -11,11 +11,9 @@ import streamlit as st
 # Obtenir le répertoire courant du script
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
-# Construire le chemin approprié pour vos fichiers CSV
-path_df_train = os.path.join(current_directory, "../Simulations/Data/df_train.csv")
-path_definition_features_df = os.path.join(
-    current_directory, "../Simulations/Data/definition_features.csv"
-)
+# Construire les chemins vers les fichiers CSV dans le dossier Prediction
+path_df_train = os.path.join(current_directory, "../Prediction/df_train.csv")
+path_definition_features_df = os.path.join(current_directory, "../Prediction/definition_features.csv")
 
 df_train = pd.read_csv(path_df_train)
 definition_features_df = pd.read_csv(path_definition_features_df)
