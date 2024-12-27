@@ -296,9 +296,8 @@ if col1.button("Run") or state["data_received"]:
         state["last_sk_id_curr"] = sk_id_curr  # Mettre à jour le dernier ID
 
     if not state["data_received"]:
-        response = requests.post(
-            "http://localhost:6000/predict", json={"SK_ID_CURR": int(sk_id_curr)}
-        )
+        response = requests.post("https://p7-implementez-un-modele-de-scoring.onrender.com/predict", json={"SK_ID_CURR": int(sk_id_curr)})
+        
         if response.status_code != 200:
             st.error(f"Erreur lors de l'appel à l'API: {response.status_code}")
             st.stop()
