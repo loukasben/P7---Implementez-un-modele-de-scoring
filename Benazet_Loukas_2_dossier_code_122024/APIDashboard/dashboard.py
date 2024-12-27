@@ -78,6 +78,11 @@ def generate_figure(df, title_text, x_anchor, yaxis_categoryorder, yaxis_side):
     return fig
 
 def generate_figure_with_gradient(df, title_text, x_anchor, yaxis_categoryorder, yaxis_side, color_map, invert=False):
+    # Check
+    if df.empty or "Feature" not in df.columns or "SHAP Value" not in df.columns:
+        st.error("Erreur : Les données pour le graphique sont invalides ou manquantes.")
+        return go.Figure()
+    
     # Normalisation des valeurs
     norm = mcolors.Normalize(vmin=df["SHAP Value"].min(), vmax=df["SHAP Value"].max())
     cmap = cm.get_cmap(color_map)
@@ -167,6 +172,17 @@ def find_closest_description(feature_name, definitions_df):
 
 def plot_distribution(selected_feature, col):
     if selected_feature:
+
+        if selected_feature not in df_train.columns:
+            st.error(f"Erreur : La fonctionnalité '{selected_feature}' est absente du DataFrame.")
+            return
+
+        data = df_train[selected_feature].dropna()
+
+        if data.empty:
+            st.warning(f"Pas de données disponibles pour la fonctionnalité '{selected_feature}'.")
+            return
+        
         data = df_train[selected_feature]
 
         # Trouver la valeur de la fonctionnalité pour le client actuel :
@@ -300,6 +316,9 @@ if col1.button("Run") or state["data_received"]:
 
     data = state["data"]
 
+    st.write("Données retournées par l'API :")
+    st.json(data)
+
     proba = data["probability"]
     feature_names = data["feature_names"]
     shap_values = data["shap_values"]
@@ -315,6 +334,13 @@ if col1.button("Run") or state["data_received"]:
         ),
         columns=["Feature", "SHAP Value", "Feature Value"],
     )
+
+    st.write("DataFrame SHAP Values :")
+    st.dataframe(shap_df)
+
+    if shap_df.empty:
+        st.error("Erreur : Le DataFrame SHAP est vide.")
+        st.stop()
 
     color = compute_color(proba)
     st.empty()
@@ -367,6 +393,16 @@ if col1.button("Run") or state["data_received"]:
 
     # Mettez la première liste déroulante dans col1
     with col1:
+
+        if top_positive_shap.empty:
+            st.warning("Aucune fonctionnalité augmentant le risque n'est disponible.")
+            selected_feature_positive = None
+        else:
+            selected_feature_positive = st.selectbox(
+                "Sélectionnez une fonctionnalité augmentant le risque",
+                [""] + top_positive_shap["Feature"].tolist(),
+            )
+        
         selected_feature_positive = st.selectbox(
             "Sélectionnez une fonctionnalité augmentant le risque",
             [""] + top_positive_shap["Feature"].tolist(),
@@ -374,6 +410,16 @@ if col1.button("Run") or state["data_received"]:
 
     # Mettez la deuxième liste déroulante dans col2
     with col2:
+
+        if top_negative_shap.empty:
+            st.warning("Aucune fonctionnalité réduisant le risque n'est disponible.")
+            selected_feature_negative = None
+        else:
+            selected_feature_negative = st.selectbox(
+                "Sélectionnez une fonctionnalité réduisant le risque",
+                [""] + top_negative_shap["Feature"].tolist(),
+            )
+        
         selected_feature_negative = st.selectbox(
             "Sélectionnez une fonctionnalité réduisant le risque",
             [""] + top_negative_shap["Feature"].tolist(),
