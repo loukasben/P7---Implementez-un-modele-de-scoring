@@ -7,7 +7,7 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# Récupérez le répertoire actuel du fichier api.py
+# Récupérer le répertoire actuel du fichier api.py
 current_directory = os.path.dirname(os.path.abspath(__file__))
 
 # Charger le modèle en dehors de la clause if __name__ == "__main__":
@@ -27,7 +27,7 @@ def predict():
     data = request.json
     sk_id_curr = data['SK_ID_CURR']
 
-    # Construisez le chemin complet vers df_train.csv en utilisant le chemin relatif depuis l'emplacement de api.py
+    # Construire le chemin complet vers df_train.csv en utilisant le chemin relatif depuis l'emplacement de api.py
     csv_path = os.path.join(current_directory, "../Prediction/df_train.csv")
     # Charger le CSV
     df = pd.read_csv(csv_path)
