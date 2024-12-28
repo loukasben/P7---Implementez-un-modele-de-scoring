@@ -3,7 +3,8 @@ Ce projet cherche à prédire la capacité d'un client à rembourser son prêt b
 - Benazet_Loukas_1_dashboard_et_API_122024.py : Script à exécuter pour démarrer le Dashboard et l'API.
 
 - Benazet_Loukas_2_dossier_code_122024 : Dossier renfermant plusieurs éléments essentiels :
-	- README.txt : Texte décrivant la structure du dépôt.
+	- README.txt : Description de la structure du dépôt.
+	- requirements.txt : Librairies requises pour le Dashboard
 	- APIDashboard : Inclut les fichiers api.py et dashboard.py.
 	- Prediction : Comprend le modèle, le StandardScaler et les data des clients.
 	- DataDrift : Intègre le script pour évaluer le Data-Drift avec evidently et un fichier HTML présentant les résultats de cette analyse.
