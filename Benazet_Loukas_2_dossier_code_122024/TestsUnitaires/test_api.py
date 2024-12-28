@@ -18,7 +18,7 @@ def client():
     with app.test_client() as client:
         yield client
 
-# Teste le chargement du modèle de prédiction
+# Tester le chargement du modèle de prédiction
 def test_model_loading():
     # Détermine le chemin du fichier contenant le modèle entraîné
     model_path = os.path.join(current_directory, "..", "Simulations", "Best_model", "model.pkl")
@@ -27,7 +27,7 @@ def test_model_loading():
     # Vérifie que le modèle a été chargé correctement
     assert model is not None, "Erreur dans le chargement du modèle."
 
-# Teste le chargement du fichier CSV contenant les données de train
+# Tester le chargement du fichier CSV contenant les données de train
 def test_csv_loading():
     # Détermine le chemin du fichier CSV
     csv_path = os.path.join(current_directory, "..", "Simulations", "Data", "df_train.csv")
@@ -36,7 +36,7 @@ def test_csv_loading():
     # Vérifie que le DataFrame n'est pas vide
     assert not df.empty, "Erreur dans le chargement du CSV."
 
-# Teste la fonction de prédiction de l'API
+# Tester la fonction de prédiction de l'API
 def test_prediction():
     import os
     import pandas as pd
