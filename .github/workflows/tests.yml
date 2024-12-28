@@ -28,4 +28,4 @@ jobs:
 
     - name: Run Tests
       run: |
-        pytest TestsUnitaires/
+        pytest Benazet_Loukas_2_dossier_code_122024/TestsUnitaires
