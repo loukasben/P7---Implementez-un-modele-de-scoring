@@ -22,7 +22,7 @@ st.set_page_config(layout="wide")
 
 def get_title_font_size(height):
     base_size = 12  # une taille de police de base
-    scale_factor = height / 600.0  # supposons que 600 est la hauteur par défaut
+    scale_factor = height / 600.0  # suppose que 600 est la hauteur par défaut
     return base_size * scale_factor
 
 def create_gauge(score, tolerance):
@@ -52,7 +52,7 @@ def create_gauge(score, tolerance):
     ))
 
     fig.update_layout(
-        height=300,  # Ajustez la hauteur pour correspondre à votre mise en page
+        height=300,  # Ajuster la hauteur pour correspondre à la mise en page
         margin={'t': 10, 'b': 10, 'l': 10, 'r': 10}, 
         font=dict(color="black", size=14)  # Taille et couleur de la police
     )
@@ -200,7 +200,7 @@ def plot_distribution(selected_feature, col):
             # Compter les occurrences de chaque valeur :
             counts = data.value_counts().sort_index()
 
-            # Assurez-vous que les longueurs correspondent
+            # S'assurer que les longueurs correspondent
             assert len(unique_values) == len(counts)
 
             # Modifier la déclaration de la liste de couleurs pour correspondre à la taille de unique_values
@@ -399,10 +399,10 @@ if col1.button("Run") or state["data_received"]:
     col_chart1.plotly_chart(fig_positive, use_container_width=True)
     col_chart2.plotly_chart(fig_negative, use_container_width=True)
 
-    # Créez des colonnes pour les listes déroulantes
+    # Créer des colonnes pour les listes déroulantes
     col1, col2 = st.columns(2)
 
-    # Mettez la première liste déroulante dans col1
+    # Mettre la première liste déroulante dans col1
     with col1:
         if top_positive_shap.empty:
             st.warning("Aucune fonctionnalité augmentant le risque n'est disponible.")
@@ -413,11 +413,11 @@ if col1.button("Run") or state["data_received"]:
                 [""] + top_positive_shap["Feature"].tolist(),
                 key="positive_selectbox"  # Clé unique
             )
-        # Appelez `plot_distribution` uniquement si une valeur est sélectionnée
+        # Appeler `plot_distribution` uniquement si une valeur est sélectionnée
         if selected_feature_positive:
             plot_distribution(selected_feature_positive, col1)
 
-    # Mettez la deuxième liste déroulante dans col2
+    # Mettre la deuxième liste déroulante dans col2
     with col2:
         if top_negative_shap.empty:
             st.warning("Aucune fonctionnalité réduisant le risque n'est disponible.")
@@ -428,6 +428,6 @@ if col1.button("Run") or state["data_received"]:
                 [""] + top_negative_shap["Feature"].tolist(),
                 key="negative_selectbox"  # Clé unique
             )
-        # Appelez `plot_distribution` uniquement si une valeur est sélectionnée
+        # Appeler `plot_distribution` uniquement si une valeur est sélectionnée
         if selected_feature_negative:
             plot_distribution(selected_feature_negative, col2)
