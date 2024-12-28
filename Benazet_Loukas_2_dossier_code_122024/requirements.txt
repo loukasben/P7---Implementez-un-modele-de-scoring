@@ -20,7 +20,7 @@ Jinja2==3.1.5
 joblib==1.4.2
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
-kiwisolver==1.4.8
+kiwisolver
 lightgbm==4.5.0
 llvmlite==0.43.0
 markdown-it-py==3.0.0
