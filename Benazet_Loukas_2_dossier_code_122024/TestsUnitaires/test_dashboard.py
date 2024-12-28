@@ -6,11 +6,11 @@ import sys
 # Obtenir le répertoire du fichier actuel 
 current_file_directory = os.path.dirname(__file__)
 
-# Créer un chemin relatif vers le dossier 'Scripts'
-scripts_directory = os.path.abspath(os.path.join(current_file_directory, '..', 'Scripts'))
+# Créer un chemin relatif vers le dossier 'APIDashboard'
+APIDashboard_directory = os.path.abspath(os.path.join(current_file_directory, '..', 'APIDashboard'))
 
 # Insérer ce chemin au début de sys.path
-sys.path.insert(0, scripts_directory)
+sys.path.insert(0, APIDashboard_directory)
 
 # Simulation d'un état pour st.session_state
 mocked_session_state = {'state': {'data_received': False, 'data': None, 'last_sk_id_curr': None}}
