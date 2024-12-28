@@ -5,7 +5,7 @@ Ce projet cherche à prédire la capacité d'un client à rembourser son prêt b
 - Benazet_Loukas_2_dossier_code_122024 : Dossier renfermant plusieurs éléments essentiels :
 	- README.txt : Texte décrivant la structure du dépôt.
 	- APIDashboard : Inclut les fichiers api.py et dashboard.py.
-	- Predictions : Comprend le modèle, le StandardScaler et les data des clients.
+	- Prediction : Comprend le modèle, le StandardScaler et les data des clients.
 	- DataDrift : Intègre le script pour évaluer le Data-Drift avec evidently et un fichier HTML présentant les résultats de cette analyse.
 	- Notebooks : Englobe les notebooks nécessaires à l'élaboration du jeu de données final "df" et à l'évaluation de différents modèles de classification.
 	- TestsUnitaires : Contient deux scripts pour des tests unitaires, l'un pour l'API et l'autre pour le Dashboard.
