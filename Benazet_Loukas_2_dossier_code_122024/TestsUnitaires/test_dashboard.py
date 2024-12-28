@@ -24,7 +24,7 @@ def mocked_st(monkeypatch):
 
 #TESTS
 
-# Utilise pytest.mark pour appliquer le mock à des tests spécifiques
+# Utiliser pytest.mark pour appliquer le mock à des tests spécifiques
 @pytest.mark.parametrize('mocked_st', [mocked_session_state], indirect=True)
 def test_compute_color(mocked_st):
     # Importez la fonction compute_color à partir du module dashboard
