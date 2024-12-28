@@ -1,6 +1,6 @@
 # Projet 7 : Implémentez un Modèle de Scoring
-Le projet permet d'évaluer le risque de non-remboursement d'un crédit en fonction des données client.
-Ce fichier contient les liens de l'API et du Dashboard déployés dans le cloud.
+# Le projet permet d'évaluer le risque de non-remboursement d'un crédit en fonction des données client.
+# Ce fichier contient les liens de l'API et du Dashboard déployés dans le cloud.
 # Exécutez ce script en ligne de commande pour afficher les adresses de l'API et du Dashboard :
 # python nom_du_fichier.py
 
