@@ -27,7 +27,7 @@ numerical_columns = [col for col in application_train.columns if col not in cate
 
 start_time = time.time()
 
-# Vérifiez que vos deux DataFrames ont exactement les mêmes colonnes
+# Vérifier que vos deux DataFrames ont exactement les mêmes colonnes
 assert set(application_train.columns) == set(application_test.columns)
 
 # Si l'assertion est réussie, cela signifie que les colonnes correspondent
@@ -53,5 +53,5 @@ print("Run du data_drift_report")
 elapsed_time_fit = time.time() - start_time
 print(elapsed_time_fit)
 
-# Sauvegardez le rapport en tant que fichier HTML
+# Sauvegarder le rapport en tant que fichier HTML
 data_drift_report.save_html('data_drift_report_FULL_script.html')
