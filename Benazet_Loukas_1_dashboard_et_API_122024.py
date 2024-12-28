@@ -1,17 +1,18 @@
-import subprocess
-import os
+# Projet 7 : Implémentez un Modèle de Scoring
+Le projet permet d'évaluer le risque de non-remboursement d'un crédit en fonction des données client.
+Ce fichier contient les liens de l'API et du Dashboard déployés dans le cloud.
+# Exécutez ce script en ligne de commande pour afficher les adresses de l'API et du Dashboard :
+# python nom_du_fichier.py
 
-# Chemin relatif pour accéder à api.py et dashboard.py
-scripts_directory = "./Benazet_Loukas_2_dossier_code_122024/APIDashboard"
+API_URL = "https://p7-implementez-un-modele-de-scoring.onrender.com"
+DASHBOARD_URL = "https://p7-dashboard.onrender.com"
 
-# Obtenez les variables d'environnement actuelles
-env = os.environ.copy()
+# Affiche le Dashboard
+def display_dashboard():
+    print("Adresses de déploiement :")
+    print(f"API : {API_URL}")
+    print(f"Dashboard : {DASHBOARD_URL}")
 
-# Modifiez la variable d'environnement PORT
-env["PORT"] = "6000"
-
-# Exécutez api.py avec python avec la nouvelle variable d'environnement
-subprocess.Popen(["python", f"{scripts_directory}/api.py"], env=env)
-
-# Exécutez dashboard.py avec streamlit
-subprocess.Popen(["streamlit", "run", f"{scripts_directory}/dashboard.py", "--server.port", "9000"], env=env)
+# Exécute la fonction si le script est exécuté directement
+if __name__ == "__main__":
+    display_dashboard()
